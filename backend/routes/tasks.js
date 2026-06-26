@@ -1,5 +1,6 @@
 import express from 'express';
 import store from '../store/taskStore.js';
+import validateTask from '../middleware/validate-task.js';
 
 const router = express.Router();
 
@@ -8,13 +9,13 @@ router.get('/', (req, res) => {
 });
 
 
-router.post('/', (req, res) => {
+router.post('/', validateTask, (req, res) => {
   const newTask = store.create(req.body);
   res.status(201).json(newTask);
 });
 
 
-router.put('/:id', (req, res) => {
+router.put('/:id', validateTask, (req, res) => {
 
   const id = Number(req.params.id);
 
