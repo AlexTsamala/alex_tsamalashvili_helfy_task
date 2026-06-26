@@ -1,5 +1,5 @@
 import express from 'express';
-import store from '../store/taskStore.js';
+import store from '../store/task-store.js';
 import validateTask from '../middleware/validate-task.js';
 
 const router = express.Router();

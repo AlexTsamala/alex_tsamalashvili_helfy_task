@@ -32,10 +32,10 @@ function create(data) {
 function update(id, data) {
   const task = tasks.find(task => task.id === id);
   if (!task) return null;
-  task.title = data.title || task.title;
-  task.description = data.description || task.description;
-  task.priority = data.priority || task.priority;
-  task.completed = data.completed || task.completed;
+  task.title = data.title;
+  task.description = data.description ?? '';
+  task.priority = data.priority ?? 'medium';
+  task.completed = data.completed ?? false;
   return task;
 }
 
