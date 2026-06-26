@@ -1,28 +1,45 @@
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .carousel {
   overflow: hidden;
-  width: 100%;
+  flex: 1;
   padding: 24px 0;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
 }
 
 .carousel-track {
   display: flex;
   width: max-content;
-  animation: scroll 30s linear infinite;
 }
 
-.carousel:hover .carousel-track {
-  animation-play-state: paused;
+.carousel-arrow {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(233, 109, 10, 0.3);
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
-@keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+.carousel-arrow:hover {
+  background: var(--accent-dark);
+  transform: scale(1.08);
+}
+
+.carousel-arrow:active {
+  transform: scale(0.96);
 }
 
 .task-card {
@@ -106,10 +123,48 @@
   min-height: 40px;
 }
 
+.task-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
 .task-status {
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--accent-dark);
+}
+
+.task-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.task-actions button {
+  border: none;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+  transition: opacity 0.15s ease;
+}
+
+.task-actions button:hover {
+  opacity: 0.85;
+}
+
+.btn-toggle {
+  background: #43a047;
+}
+
+.btn-edit {
+  background: var(--accent);
+}
+
+.btn-delete {
+  background: #e53935;
 }
 
 .task-list-empty {

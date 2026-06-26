@@ -1,3 +1,13 @@
+.status-msg {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+}
+
+.status-msg.error {
+  color: #e53935;
+}
+
 .app {
   max-width: 1100px;
   margin: 0 auto;
