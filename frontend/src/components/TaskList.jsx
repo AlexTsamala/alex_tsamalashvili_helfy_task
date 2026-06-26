@@ -1,9 +1,14 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import '../styles/TaskList.css'
 import TaskItem from './TaskItem.jsx'
 
+const AUTO_ADVANCE_MS = 3000
+const RESUME_DELAY = 4000
+
 const TaskList = ({ tasks, onToggle, onEdit, onDelete }) => {
   const viewportRef = useRef(null)
+  const pausedRef = useRef(false)
+  const resumeTimer = useRef(null)
 
   const slide = (direction) => {
     const el = viewportRef.current
@@ -23,6 +28,32 @@ const TaskList = ({ tasks, onToggle, onEdit, onDelete }) => {
     }
   }
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!pausedRef.current) {
+        slide(1)
+      }
+    }, AUTO_ADVANCE_MS)
+    return () => clearInterval(interval)
+  }, [])
+
+  const pause = () => {
+    pausedRef.current = true
+    clearTimeout(resumeTimer.current)
+  }
+
+  const resume = () => {
+    pausedRef.current = false
+  }
+
+  const pauseTemporarily = () => {
+    pausedRef.current = true
+    clearTimeout(resumeTimer.current)
+    resumeTimer.current = setTimeout(() => {
+      pausedRef.current = false
+    }, RESUME_DELAY)
+  }
+
   if (!tasks || tasks.length === 0) {
     return (
       <div className="task-list-empty">
@@ -32,7 +63,12 @@ const TaskList = ({ tasks, onToggle, onEdit, onDelete }) => {
   }
 
   return (
-    <div className="carousel-wrapper">
+    <div
+      className="carousel-wrapper"
+      onMouseEnter={pause}
+      onMouseLeave={resume}
+      onTouchStart={pauseTemporarily}
+    >
       <button className="carousel-arrow" onClick={() => slide(-1)} aria-label="Previous task">
         ❮
       </button>
