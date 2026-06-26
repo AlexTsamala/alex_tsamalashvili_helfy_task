@@ -9,6 +9,17 @@
   --text-muted: #8a7f78;
   --surface: #ffffff;
   --bg: #fff8f3;
+  --border: #e7d8cc;
+  --input-bg: #ffffff;
+}
+
+[data-theme="dark"] {
+  --text: #f1e9e3;
+  --text-muted: #b3a79f;
+  --surface: #2a2622;
+  --bg: #1c1917;
+  --border: #463f39;
+  --input-bg: #221f1c;
 }
 
 * {

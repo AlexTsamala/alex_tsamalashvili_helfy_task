@@ -12,6 +12,14 @@ export default function App() {
   const [editingTask, setEditingTask] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light')
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('theme', theme)
+  }, [theme])
+
+  const toggleTheme = () => setTheme((prev) => (prev === 'light' ? 'dark' : 'light'))
 
   useEffect(() => {
     api
@@ -59,7 +67,12 @@ export default function App() {
 
   return (
     <div className="app">
-      <h1>Task Manager</h1>
+      <header className="app-header">
+        <h1>Task Manager</h1>
+        <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle dark mode">
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+      </header>
 
       <TaskForm onCreate={handleCreate} />
 
